@@ -17,18 +17,34 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: CustomGradientButton(
-          texto: Text("Sing in"),
-          ancho: 100,
-          altura: 40,
-          colores: [Colors.blue, Colors.blue],
-          poscisionInicial: Alignment.centerLeft,
-          poscisionFinal: Alignment.centerRight,
-          funcion: ()=>print("No hace nada"),
-          iconoApp: Icon(Icons.person),
-        ),//child
-      ),//Center
+      body: Column(
+        children: [
+          CustomGradientButton(
+            texto: Text("Sing in"),
+            ancho: 100,
+            altura: 40,
+            colores: [Colors.blue, Colors.blue],
+            poscisionInicial: Alignment.centerLeft,
+            poscisionFinal: Alignment.centerRight,
+            funcion: ()=>print("No hace nada"),
+            iconoApp: Icon(Icons.person),
+          ),//CustomGradiant
+          TextFormField(
+            decoration: const InputDecoration(
+              icon: Icon(Icons.person),
+              hintText: 'What do people call you?',
+              labelText: 'Name *',
+            ),
+            onSaved: (String value) {
+              // This optional block of code can be used to run
+              // code when the user saves the form.
+            },
+            validator: (String value) {
+              return value.contains('@') ? 'Do not use the @ char.' : null;
+            },
+          ),
+        ]//Children
+      ),//Column
     );//Scaffold
   }//Build
 }//Class
@@ -87,9 +103,8 @@ class CustomGradientButton extends StatelessWidget{
             texto,
             iconoFinal ?? Offstage(),
           ],//widget
-        )//child 
+        )//child
       ),//container
     );
   }
 }
-
